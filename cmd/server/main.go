@@ -53,10 +53,8 @@ func hasNameMiddleware(next http.Handler) http.Handler {
 }
 
 func main() {
-	portPtr := flag.Int("p", 8080, "an int")
+	portPtr := flag.Int("p", 8080, "server port")
 	flag.Parse()
-
-	fmt.Println(*portPtr)
 
 	mux := http.NewServeMux()
 	mux.Handle("/update/gauge/{name}/{value}", Conveyor(http.HandlerFunc(handler.HandleGauge), isPostMiddleware, hasNameMiddleware))
